@@ -1,7 +1,7 @@
 {
   "name": "koishi-plugin-fantan-game",
-  "description": "",
-  "version": "0.0.1",
+  "description": "可在群聊中玩的番摊赌博游戏。番摊是一种传统的中国赌博游戏，从多种投注选项中选择，并根据赔率赚取积分。",
+  "version": "0.0.3",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -9,11 +9,23 @@
     "dist"
   ],
   "license": "MIT",
+  "author": "Nawyjx <3373167460@qq.com>",
+  "homepage": "https://www.npmjs.com/package/koishi-plugin-fantan-game?activeTab=readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/araea/koishi-plugin-fantan-game.git"
+  },
   "scripts": {},
   "keywords": [
     "chatbot",
     "koishi",
-    "plugin"
+    "plugin",
+    "fantan",
+    "bet",
+    "game",
+    "番摊",
+    "赌博",
+    "广摊"
   ],
   "peerDependencies": {
     "koishi": "^4.14.2"
