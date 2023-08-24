@@ -48,6 +48,7 @@ export const usage = `
 | \`fantan.start\`                          | 开始新的 fantan 游戏。       | \`fantan.start\`                      |
 | \`fantan.single <amount>\`                | 单投注（1 或 3）。           | \`fantan.single 500\`                 |
 | \`fantan.double <amount>\`                | 双投注（2 或 4）。           | \`fantan.double 500\`                 |
+| \`fantan.zheng <number> <amount>\`          | 正投注（具体的数字）。       | \`fantan.zheng 1 500\`                  |
 | \`fantan.fan <number> <amount>\`          | 番投注（具体的数字）。       | \`fantan.fan 1 500\`                  |
 | \`fantan.nian <number> <amount>\`         | 念投注（一对数字）。         | \`fantan.nian 12 500\`                |
 | \`fantan.jiao <number> <amount>\`         | 角投注（一对数字）。         | \`fantan.jiao 13 500\`                |
@@ -377,6 +378,59 @@ ${outputString}`
       }
       await Promise.all([
         ctx.database.create('fantan_player_records', { guildId, userId, userName: username, betType: '双', bettingNumber: '24', amount }),
+
+      ])
+      const playerRecords = await ctx.database.get('fantan_player_records', { guildId, userId })
+      let outputString = '';
+
+      for (const record of playerRecords) {
+        const { betType, bettingNumber, amount } = record;
+        outputString += `投注类型：【${betType}】
+投注数字：【${bettingNumber}】
+投注金额：【${amount}】\n\n`;
+      }
+
+      return `${h.at(userId)} ~\n${msg.betSuccessRecorded}
+
+您在本期的投注记录如下：
+用户名：【${username}】
+
+${outputString}`
+    })
+  ctx.command('fantan.zheng <bettingNumber:string> <amount:number>', '正投注').alias('正投注')
+    .action(async ({ session }, bettingNumber: string, amount: number) => {
+      const {
+        username,
+        userId,
+        guildId,
+      } = session
+      // 判断 bettingNumber 是否为有效数字，并且只能有一位
+      if (bettingNumber.length !== 1 || isNaN(Number(bettingNumber))) {
+        return msg.betFailInvalidNumber
+      }
+      // 检查 amount 是否为有效数字，并且大于零
+      if (isNaN(amount) || amount <= 0) {
+        return msg.betFailInvalidAmount
+      }
+      // 判断 bettingNumber 是否为开奖结果中的一个
+      const winningNumbers = [1, 2, 3, 4];
+      const bettingNum = Number(bettingNumber);
+      if (!winningNumbers.includes(bettingNum)) {
+        return msg.betFailNotInWinningNumbers
+      }
+      // 获取玩家信息并检查余额是否足够
+      const playerInfo = await getPlayerInfo(userId, username)
+      if (playerInfo.balance < amount) {
+        return `${msg.betFailInsufficientBalance}
+您当前的余额为：【${playerInfo.balance}】`
+      }
+      const issuePrefix = formatDateString();
+      const issueInfo = await ctx.database.get('fantan_games', { guildId, issuePrefix })
+      if (issueInfo.length === 0 || issueInfo[issueInfo.length - 1].isBettingTimeOver) {
+        return msg.betFailGameNotStartedOrEndTimeExpired
+      }
+      await Promise.all([
+        ctx.database.create('fantan_player_records', { guildId, userId, userName: username, betType: '正', bettingNumber, amount }),
 
       ])
       const playerRecords = await ctx.database.get('fantan_player_records', { guildId, userId })
@@ -808,7 +862,7 @@ ${outputString}`
         break;
       case '正':
         win = lotteryResult === parseInt(bettingNumber);
-        draw = Math.abs(lotteryResult - parseInt(bettingNumber)) === 2;
+        draw = Math.abs(lotteryResult - parseInt(bettingNumber)) !== 2;
         payout = amount * 1;
         break;
       case '番':

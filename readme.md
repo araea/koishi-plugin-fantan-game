@@ -58,6 +58,7 @@
 | `fantan.start`                          | 开始新的 fantan 游戏。       | `fantan.start`                      |
 | `fantan.single <amount>`                | 单投注（1 或 3）。           | `fantan.single 500`                 |
 | `fantan.double <amount>`                | 双投注（2 或 4）。           | `fantan.double 500`                 |
+| `fantan.zheng <number> <amount>`          | 正投注（具体的数字）。       | `fantan.zheng 1 500`                  |
 | `fantan.fan <number> <amount>`          | 番投注（具体的数字）。       | `fantan.fan 1 500`                  |
 | `fantan.nian <number> <amount>`         | 念投注（一对数字）。         | `fantan.nian 12 500`                |
 | `fantan.jiao <number> <amount>`         | 角投注（一对数字）。         | `fantan.jiao 13 500`                |
