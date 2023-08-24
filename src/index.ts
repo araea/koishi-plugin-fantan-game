@@ -171,7 +171,7 @@ export function apply(ctx: Context, config: Config) {
     .action(async ({ session }) => {
       await session.execute(`fantan -h`)
     })
-  ctx.command('fantan.rule', '查看番摊游戏规则')
+  ctx.command('fantan.rule', '查看番摊游戏规则').alias('番摊规则')
     .action(async ({ session }) => {
       await session.send(`番摊游戏规则说明：
 
