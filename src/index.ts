@@ -57,9 +57,9 @@ export const usage = `
 | \`fantan.withdrawBettings\`               | 撤回当前游戏中的所有押注。   | \`fantan.withdrawBettings\`           |
 | \`fantan.myInfo\`                         | 查看个人信息。               | \`fantan.myInfo\`                     |
 | \`fantan.rechargeAmount <amount>\`        | 充值账户余额。               | \`fantan.rechargeAmount 1000\`        |
-| \`fantan.userRecharge <user> <amount>\`   | 充值其他用户的账户余额。     | \`@Alice fantan.userRecharge 1000\`   |
+| \`fantan.userRecharge <user> <amount>\`   | 充值其他用户的账户余额。     | \`fantan.userRecharge @Alice 1000\`   |
 | \`fantan.withdrawalAmount <amount>\`      | 提现账户余额。               | \`fantan.withdrawalAmount 1000\`      |
-| \`fantan.userWithdrawal <user> <amount>\` | 提现其他用户的账户余额。     | \`@Alice fantan.userWithdrawal 1000\` |
+| \`fantan.userWithdrawal <user> <amount>\` | 提现其他用户的账户余额。     | \`fantan.userWithdrawal @Alice 1000\` |
 | \`fantan.history\`                        | 查看最近的 fantan 游戏记录。 | \`fantan.history\`                    |`
 
 export interface Config {
