@@ -404,6 +404,9 @@ ${outputString}`
         userId,
         guildId,
       } = session
+      if (!bettingNumber || !amount) {
+        return 
+      }
       // 判断 bettingNumber 是否为有效数字，并且只能有一位
       if (bettingNumber.length !== 1 || isNaN(Number(bettingNumber))) {
         return msg.betFailInvalidNumber
@@ -457,6 +460,9 @@ ${outputString}`
         userId,
         guildId,
       } = session
+      if (!bettingNumber || !amount) {
+        return 
+      }
       // 判断 bettingNumber 是否为有效数字，并且只能有一位
       if (bettingNumber.length !== 1 || isNaN(Number(bettingNumber))) {
         return msg.betFailInvalidNumber
@@ -510,6 +516,9 @@ ${outputString}`
         userId,
         guildId,
       } = session
+      if (!bettingNumber || !amount) {
+        return 
+      }
       // 判断 bettingNumber 是否为有效数字，并且只能有两位
       if (bettingNumber.length !== 2 || isNaN(Number(bettingNumber))) {
         return msg.betFailInvalidNumber
@@ -565,6 +574,9 @@ ${outputString}`
         userId,
         guildId,
       } = session
+      if (!bettingNumber || !amount) {
+        return 
+      }
       // 判断 bettingNumber 是否为有效数字，并且只能有两位
       if (bettingNumber.length !== 2 || isNaN(Number(bettingNumber))) {
         return msg.betFailInvalidNumber
@@ -620,6 +632,9 @@ ${outputString}`
         userId,
         guildId,
       } = session
+      if (!bettingNumber || !amount) {
+        return 
+      }
       // 判断 bettingNumber 是否为有效数字，并且只能有三位
       if (bettingNumber.length !== 3 || isNaN(Number(bettingNumber))) {
         return msg.betFailInvalidNumber
@@ -675,6 +690,9 @@ ${outputString}`
         userId,
         guildId,
       } = session
+      if (!bettingNumber || !amount) {
+        return 
+      }
       // 判断 bettingNumber 是否为有效数字，并且只能有三位
       if (bettingNumber.length !== 3 || isNaN(Number(bettingNumber))) {
         return msg.betFailInvalidNumber
